@@ -3,7 +3,6 @@ package utils;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.Action;
 
 import loggers.Log;
 
@@ -13,6 +12,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import testData.TestConditions.Direction;
 import infra.LocalizedTestBase;
@@ -20,7 +20,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 
-public class DeviceActions extends LocalizedTestBase{
+public class DeviceActions extends LocalizedTestBase {
 	AppiumDriver<MobileElement> driver;
 
 	public DeviceActions(AppiumDriver<MobileElement> driver) {
@@ -112,7 +112,7 @@ public class DeviceActions extends LocalizedTestBase{
 
 	public String snapShot(String Screen, String ScreenType, Boolean uiTest) {
 
-		String filePath=null;
+		String filePath = null;
 		String deviceSerial = driver.getCapabilities().getCapability("udid")
 				.toString();
 		Log.INFO("Taking Spanshot of " + deviceSerial);
@@ -134,21 +134,55 @@ public class DeviceActions extends LocalizedTestBase{
 		return filePath;
 	}
 
+	public Boolean isElementOnScreen(MobileElement element, String elementName) {
+		try {
+			Assert.assertTrue(waitForElement(element, 5).isDisplayed());
+			logTestMessage("Verified the : " + elementName
+					+ " displayed on Screen");
+			return true;
+		} catch (TimeoutException er) {
+			logTestMessage("Element : " + elementName
+					+ " is not displayed on the screen");
+			return false;
+		}
+	}
+
 	public Boolean isElementAvailableOnScreen(List<MobileElement> elementList,
 			MobileElement scrollview, String text, int maxswipeOnSccreen,
 			Direction direction) {
 
 		for (int i = 0; i < maxswipeOnSccreen; i++) {
 			for (MobileElement element : elementList) {
-				Log.INFO(element.getText().trim()+" is comparing with"+text.trim());
+				Log.INFO(element.getText().trim() + " is comparing with"
+						+ text.trim());
 				if (element.getText().trim().equals(text.trim())) {
-					logTestMessage("Verified the "+ text+" is available on the screen");
-					
+					logTestMessage("Verified the " + text
+							+ " is available on the screen");
+
 					return true;
 				}
 			}
 			verticalSwip(scrollview, direction);
 		}
 		return false;
+	}
+
+	public void verifyMobileElements(String screenName,
+			MobileElement... elementList) {
+		for (int i = 0; i < elementList.length; i++) {
+			try {
+				waitForElement(elementList[i], 20);
+				if (elementList[i].isDisplayed()) {
+					logTestMessage("Verified element : "
+							+ elementList[i].toString());
+					continue;
+
+				}
+			} catch (Exception ex) {
+				logTestMessage("Element: " + elementList[i].toString()
+						+ " Not Displayed");
+			}
+		}
+
 	}
 }

@@ -28,6 +28,7 @@ public class DriverInitFactory {
 						platformName);
 				caps.setCapability(MobileCapabilityType.PLATFORM_VERSION,
 						platformVersion);
+				caps.setCapability(MobileCapabilityType.NO_RESET, true);
 				caps.setCapability(MobileCapabilityType.UDID, udid);
 				caps.setCapability(MobileCapabilityType.APP, Constants.appPath);
 				caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,Constants.appActivity);

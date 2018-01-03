@@ -127,7 +127,7 @@ public class ListingScreen {
 
 	public ListingScreen ListItemUnderCategory() {
 		listItButton.click();
-		action.clickifDisplayed(closeOnSuccessPopup, 5);
+		action.clickifDisplayed(closeOnSuccessPopup, 10);
 		action.logScreenCapture("List item under category", "ListingScreen3");
 		action.clickifDisplayed(closeIt, 5);
 		

@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" parallel="tests" thread-count="2">
+<suite name="TestSuite" parallel="tests" thread-count="1">
 
 	<test name="Test on 1 device- Verify Product Category">
 		<parameter name="deviceName" value="Motog4plus" />
-		<parameter name="udid" value="xxxxxxxxxxxxxxxxx" />
+		<parameter name="udid" value="ZY223Q76Q6" />
 		<parameter name="platformName" value="android" />
 		<parameter name="platformVersion" value="7.0" />
 		<parameter name="port" value="8301" />
 		<classes>
 			<class name="tests.ProductListTest" />
 		</classes>
-	</test> 
-	
-		<test name="Test on 2 device- Verify Product Category">
-		<parameter name="deviceName" value="LgNexus" />
-		<parameter name="udid" value="xxxxxxxxxx" />
-		<parameter name="platformName" value="android" />
-		<parameter name="platformVersion" value="6.0" />
-		<parameter name="port" value="8701" />
-		<classes>
-			<class name="tests.ProductListTest" />
-		</classes>
-	</test>  
-	
+	</test> 	
 	
 </suite>

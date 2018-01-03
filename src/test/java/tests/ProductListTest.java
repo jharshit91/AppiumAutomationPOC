@@ -18,6 +18,7 @@ import infra.DriverInitFactory;
 import infra.LocalizedTestBase;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
 public class ProductListTest extends LocalizedTestBase {
 	private AppiumDriver<MobileElement> driver;
@@ -49,7 +50,7 @@ public class ProductListTest extends LocalizedTestBase {
 
 		String TestProductLabel = "PickitemFor"
 				+ factory.getCapability("deviceName");
-
+        
 		screenHandler.getLoginPage().performLogin();
 		screenHandler.getHomeScreen().clickOnSellButton();
 		screenHandler
